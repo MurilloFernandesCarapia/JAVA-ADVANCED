@@ -11,16 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
-public class ValidationExeptionHandler {
+public class ValidationExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidationException(MethodArgumentNotValidException ex){
-        Map<String, String > errors = new HashMap<>();
-        for(FieldError fieldError : ex.getBindingResult().getFieldErrors()){
+    public ResponseEntity<Map<String, String>> handleValidationException(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
             errors.put(fieldError.getField(), fieldError.getDefaultMessage());
-
         }
-         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST );
-
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
-
 }
